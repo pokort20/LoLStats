@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{35B193B6-2938-4E0E-B8F9-4D718C7B770D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LoLStats</RootNamespace>
+    <AssemblyName>LoLStats</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="CustomControls\ChampionCustomControl.cs" />
+    <Compile Include="CustomControls\SavedAccountCustomControl.cs" />
+    <Compile Include="ErrorWindow.xaml.cs">
+      <DependentUpon>ErrorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChampionModel.cs" />
+    <Compile Include="Model\LeagueInfoModel.cs" />
+    <Compile Include="Model\SavedAccountsModel.cs" />
+    <Compile Include="Model\SummonerModel.cs" />
+    <Compile Include="Support\Command.cs" />
+    <Compile Include="Support\ViewModelSupport.cs" />
+    <Compile Include="ViewModel\ChampionViewModel.cs" />
+    <Compile Include="ViewModel\SavedAccountViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelErrorWindow.cs" />
+    <Compile Include="ViewModel\ViewModelMainWin.cs" />
+    <Page Include="ErrorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="ApiFunctions\Api.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\LolStats_small.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\LolStats.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\ChampionIcons\Aatrox.jpg" />
+    <Resource Include="Data\ChampionIcons\Ahri.jpg" />
+    <Resource Include="Data\ChampionIcons\Akali.jpg" />
+    <Resource Include="Data\ChampionIcons\Alistar.jpg" />
+    <Resource Include="Data\ChampionIcons\Amumu.jpg" />
+    <Resource Include="Data\ChampionIcons\Anivia.jpg" />
+    <Resource Include="Data\ChampionIcons\Annie.jpg" />
+    <Resource Include="Data\ChampionIcons\Aphelios.jpg" />
+    <Resource Include="Data\ChampionIcons\Ashe.jpg" />
+    <Resource Include="Data\ChampionIcons\AurelionSol.jpg" />
+    <Resource Include="Data\ChampionIcons\Azir.jpg" />
+    <Resource Include="Data\ChampionIcons\Bard.jpg" />
+    <Resource Include="Data\ChampionIcons\Blitzcrank.jpg" />
+    <Resource Include="Data\ChampionIcons\Brand.jpg" />
+    <Resource Include="Data\ChampionIcons\Braum.jpg" />
+    <Resource Include="Data\ChampionIcons\Caitlyn.jpg" />
+    <Resource Include="Data\ChampionIcons\Camille.jpg" />
+    <Resource Include="Data\ChampionIcons\Cassiopeia.jpg" />
+    <Resource Include="Data\ChampionIcons\Chogath.jpg" />
+    <Resource Include="Data\ChampionIcons\Corki.jpg" />
+    <Resource Include="Data\ChampionIcons\Darius.jpg" />
+    <Resource Include="Data\ChampionIcons\Diana.jpg" />
+    <Resource Include="Data\ChampionIcons\Draven.jpg" />
+    <Resource Include="Data\ChampionIcons\DrMundo.jpg" />
+    <Resource Include="Data\ChampionIcons\Ekko.jpg" />
+    <Resource Include="Data\ChampionIcons\Elise.jpg" />
+    <Resource Include="Data\ChampionIcons\Evelynn.jpg" />
+    <Resource Include="Data\ChampionIcons\Ezreal.jpg" />
+    <Resource Include="Data\ChampionIcons\FiddleSticks.jpg" />
+    <Resource Include="Data\ChampionIcons\Fiora.jpg" />
+    <Resource Include="Data\ChampionIcons\Fizz.jpg" />
+    <Resource Include="Data\ChampionIcons\Galio.jpg" />
+    <Resource Include="Data\ChampionIcons\Gangplank.jpg" />
+    <Resource Include="Data\ChampionIcons\Garen.jpg" />
+    <Resource Include="Data\ChampionIcons\Gnar.jpg" />
+    <Resource Include="Data\ChampionIcons\Gragas.jpg" />
+    <Resource Include="Data\ChampionIcons\Graves.jpg" />
+    <Resource Include="Data\ChampionIcons\Hecarim.jpg" />
+    <Resource Include="Data\ChampionIcons\Heimerdinger.jpg" />
+    <Resource Include="Data\ChampionIcons\Illaoi.jpg" />
+    <Resource Include="Data\ChampionIcons\Irelia.jpg" />
+    <Resource Include="Data\ChampionIcons\Ivern.jpg" />
+    <Resource Include="Data\ChampionIcons\Janna.jpg" />
+    <Resource Include="Data\ChampionIcons\JarvanIV.jpg" />
+    <Resource Include="Data\ChampionIcons\Jax.jpg" />
+    <Resource Include="Data\ChampionIcons\Jayce.jpg" />
+    <Resource Include="Data\ChampionIcons\Jhin.jpg" />
+    <Resource Include="Data\ChampionIcons\Jinx.jpg" />
+    <Resource Include="Data\ChampionIcons\Kaisa.jpg" />
+    <Resource Include="Data\ChampionIcons\Kalista.jpg" />
+    <Resource Include="Data\ChampionIcons\Karma.jpg" />
+    <Resource Include="Data\ChampionIcons\Karthus.jpg" />
+    <Resource Include="Data\ChampionIcons\Kassadin.jpg" />
+    <Resource Include="Data\ChampionIcons\Katarina.jpg" />
+    <Resource Include="Data\ChampionIcons\Kayle.jpg" />
+    <Resource Include="Data\ChampionIcons\Kayn.jpg" />
+    <Resource Include="Data\ChampionIcons\Kennen.jpg" />
+    <Resource Include="Data\ChampionIcons\Khazix.jpg" />
+    <Resource Include="Data\ChampionIcons\Kindred.jpg" />
+    <Resource Include="Data\ChampionIcons\Kled.jpg" />
+    <Resource Include="Data\ChampionIcons\KogMaw.jpg" />
+    <Resource Include="Data\ChampionIcons\Leblanc.jpg" />
+    <Resource Include="Data\ChampionIcons\LeeSin.jpg" />
+    <Resource Include="Data\ChampionIcons\Leona.jpg" />
+    <Resource Include="Data\ChampionIcons\Lillia.jpg" />
+    <Resource Include="Data\ChampionIcons\Lissandra.jpg" />
+    <Resource Include="Data\ChampionIcons\Lucian.jpg" />
+    <Resource Include="Data\ChampionIcons\Lulu.jpg" />
+    <Resource Include="Data\ChampionIcons\Lux.jpg" />
+    <Resource Include="Data\ChampionIcons\Malphite.jpg" />
+    <Resource Include="Data\ChampionIcons\Malzahar.jpg" />
+    <Resource Include="Data\ChampionIcons\Maokai.jpg" />
+    <Resource Include="Data\ChampionIcons\MasterYi.jpg" />
+    <Resource Include="Data\ChampionIcons\MissFortune.jpg" />
+    <Resource Include="Data\ChampionIcons\MonkeyKing.jpg" />
+    <Resource Include="Data\ChampionIcons\Mordekaiser.jpg" />
+    <Resource Include="Data\ChampionIcons\Morgana.jpg" />
+    <Resource Include="Data\ChampionIcons\Nami.jpg" />
+    <Resource Include="Data\ChampionIcons\Nasus.jpg" />
+    <Resource Include="Data\ChampionIcons\Nautilus.jpg" />
+    <Resource Include="Data\ChampionIcons\Neeko.jpg" />
+    <Resource Include="Data\ChampionIcons\Nidalee.jpg" />
+    <Resource Include="Data\ChampionIcons\Nocturne.jpg" />
+    <Resource Include="Data\ChampionIcons\Nunu.jpg" />
+    <Resource Include="Data\ChampionIcons\Olaf.jpg" />
+    <Resource Include="Data\ChampionIcons\Orianna.jpg" />
+    <Resource Include="Data\ChampionIcons\Ornn.jpg" />
+    <Resource Include="Data\ChampionIcons\Pantheon.jpg" />
+    <Resource Include="Data\ChampionIcons\Poppy.jpg" />
+    <Resource Include="Data\ChampionIcons\Pyke.jpg" />
+    <Resource Include="Data\ChampionIcons\Qiyana.jpg" />
+    <Resource Include="Data\ChampionIcons\Quinn.jpg" />
+    <Resource Include="Data\ChampionIcons\Rakan.jpg" />
+    <Resource Include="Data\ChampionIcons\Rammus.jpg" />
+    <Resource Include="Data\ChampionIcons\RekSai.jpg" />
+    <Resource Include="Data\ChampionIcons\Rell.jpg" />
+    <Resource Include="Data\ChampionIcons\Renekton.jpg" />
+    <Resource Include="Data\ChampionIcons\Rengar.jpg" />
+    <Resource Include="Data\ChampionIcons\Riven.jpg" />
+    <Resource Include="Data\ChampionIcons\Rumble.jpg" />
+    <Resource Include="Data\ChampionIcons\Ryze.jpg" />
+    <Resource Include="Data\ChampionIcons\Samira.jpg" />
+    <Resource Include="Data\ChampionIcons\Sejuani.jpg" />
+    <Resource Include="Data\ChampionIcons\Senna.jpg" />
+    <Resource Include="Data\ChampionIcons\Seraphine.jpg" />
+    <Resource Include="Data\ChampionIcons\Sett.jpg" />
+    <Resource Include="Data\ChampionIcons\Shaco.jpg" />
+    <Resource Include="Data\ChampionIcons\Shen.jpg" />
+    <Resource Include="Data\ChampionIcons\Shyvana.jpg" />
+    <Resource Include="Data\ChampionIcons\Singed.jpg" />
+    <Resource Include="Data\ChampionIcons\Sion.jpg" />
+    <Resource Include="Data\ChampionIcons\Sivir.jpg" />
+    <Resource Include="Data\ChampionIcons\Skarner.jpg" />
+    <Resource Include="Data\ChampionIcons\Sona.jpg" />
+    <Resource Include="Data\ChampionIcons\Soraka.jpg" />
+    <Resource Include="Data\ChampionIcons\Swain.jpg" />
+    <Resource Include="Data\ChampionIcons\Sylas.jpg" />
+    <Resource Include="Data\ChampionIcons\Syndra.jpg" />
+    <Resource Include="Data\ChampionIcons\TahmKench.jpg" />
+    <Resource Include="Data\ChampionIcons\Taliyah.jpg" />
+    <Resource Include="Data\ChampionIcons\Talon.jpg" />
+    <Resource Include="Data\ChampionIcons\Taric.jpg" />
+    <Resource Include="Data\ChampionIcons\Teemo.jpg" />
+    <Resource Include="Data\ChampionIcons\Thresh.jpg" />
+    <Resource Include="Data\ChampionIcons\Tristana.jpg" />
+    <Resource Include="Data\ChampionIcons\Trundle.jpg" />
+    <Resource Include="Data\ChampionIcons\Tryndamere.jpg" />
+    <Resource Include="Data\ChampionIcons\TwistedFate.jpg" />
+    <Resource Include="Data\ChampionIcons\Twitch.jpg" />
+    <Resource Include="Data\ChampionIcons\Udyr.jpg" />
+    <Resource Include="Data\ChampionIcons\Urgot.jpg" />
+    <Resource Include="Data\ChampionIcons\Varus.jpg" />
+    <Resource Include="Data\ChampionIcons\Vayne.jpg" />
+    <Resource Include="Data\ChampionIcons\Veigar.jpg" />
+    <Resource Include="Data\ChampionIcons\Velkoz.jpg" />
+    <Resource Include="Data\ChampionIcons\Vi.jpg" />
+    <Resource Include="Data\ChampionIcons\Viktor.jpg" />
+    <Resource Include="Data\ChampionIcons\Vladimir.jpg" />
+    <Resource Include="Data\ChampionIcons\Volibear.jpg" />
+    <Resource Include="Data\ChampionIcons\Warwick.jpg" />
+    <Resource Include="Data\ChampionIcons\Xayah.jpg" />
+    <Resource Include="Data\ChampionIcons\Xerath.jpg" />
+    <Resource Include="Data\ChampionIcons\XinZhao.jpg" />
+    <Resource Include="Data\ChampionIcons\Yasuo.jpg" />
+    <Resource Include="Data\ChampionIcons\Yone.jpg" />
+    <Resource Include="Data\ChampionIcons\Yorick.jpg" />
+    <Resource Include="Data\ChampionIcons\Yuumi.jpg" />
+    <Resource Include="Data\ChampionIcons\Zac.jpg" />
+    <Resource Include="Data\ChampionIcons\Zed.jpg" />
+    <Resource Include="Data\ChampionIcons\Ziggs.jpg" />
+    <Resource Include="Data\ChampionIcons\Zilean.jpg" />
+    <Resource Include="Data\ChampionIcons\Zoe.jpg" />
+    <Resource Include="Data\ChampionIcons\Zyra.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\saved_accounts.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\ChampionIcons\Aatrox.png" />
+    <Resource Include="Data\ChampionIcons\Ahri.png" />
+    <Resource Include="Data\ChampionIcons\Akali.png" />
+    <Resource Include="Data\ChampionIcons\Alistar.png" />
+    <Resource Include="Data\ChampionIcons\Amumu.png" />
+    <Resource Include="Data\ChampionIcons\Anivia.png" />
+    <Resource Include="Data\ChampionIcons\Annie.png" />
+    <Resource Include="Data\ChampionIcons\Aphelios.png" />
+    <Resource Include="Data\ChampionIcons\Ashe.png" />
+    <Resource Include="Data\ChampionIcons\AurelionSol.png" />
+    <Resource Include="Data\ChampionIcons\Azir.png" />
+    <Resource Include="Data\ChampionIcons\Bard.png" />
+    <Resource Include="Data\ChampionIcons\Blitzcrank.png" />
+    <Resource Include="Data\ChampionIcons\Brand.png" />
+    <Resource Include="Data\ChampionIcons\Braum.png" />
+    <Resource Include="Data\ChampionIcons\Caitlyn.png" />
+    <Resource Include="Data\ChampionIcons\Camille.png" />
+    <Resource Include="Data\ChampionIcons\Cassiopeia.png" />
+    <Resource Include="Data\ChampionIcons\Chogath.png" />
+    <Resource Include="Data\ChampionIcons\Corki.png" />
+    <Resource Include="Data\ChampionIcons\Darius.png" />
+    <Resource Include="Data\ChampionIcons\Diana.png" />
+    <Resource Include="Data\ChampionIcons\Draven.png" />
+    <Resource Include="Data\ChampionIcons\DrMundo.png" />
+    <Resource Include="Data\ChampionIcons\Ekko.png" />
+    <Resource Include="Data\ChampionIcons\Elise.png" />
+    <Resource Include="Data\ChampionIcons\Evelynn.png" />
+    <Resource Include="Data\ChampionIcons\Ezreal.png" />
+    <Resource Include="Data\ChampionIcons\Fiddlesticks.png" />
+    <Resource Include="Data\ChampionIcons\Fiora.png" />
+    <Resource Include="Data\ChampionIcons\Fizz.png" />
+    <Resource Include="Data\ChampionIcons\Galio.png" />
+    <Resource Include="Data\ChampionIcons\Gangplank.png" />
+    <Resource Include="Data\ChampionIcons\Garen.png" />
+    <Resource Include="Data\ChampionIcons\Gnar.png" />
+    <Resource Include="Data\ChampionIcons\Gragas.png" />
+    <Resource Include="Data\ChampionIcons\Graves.png" />
+    <Resource Include="Data\ChampionIcons\Hecarim.png" />
+    <Resource Include="Data\ChampionIcons\Heimerdinger.png" />
+    <Resource Include="Data\ChampionIcons\Illaoi.png" />
+    <Resource Include="Data\ChampionIcons\Irelia.png" />
+    <Resource Include="Data\ChampionIcons\Ivern.png" />
+    <Resource Include="Data\ChampionIcons\Janna.png" />
+    <Resource Include="Data\ChampionIcons\JarvanIV.png" />
+    <Resource Include="Data\ChampionIcons\Jax.png" />
+    <Resource Include="Data\ChampionIcons\Jayce.png" />
+    <Resource Include="Data\ChampionIcons\Jhin.png" />
+    <Resource Include="Data\ChampionIcons\Jinx.png" />
+    <Resource Include="Data\ChampionIcons\Kaisa.png" />
+    <Resource Include="Data\ChampionIcons\Kalista.png" />
+    <Resource Include="Data\ChampionIcons\Karma.png" />
+    <Resource Include="Data\ChampionIcons\Karthus.png" />
+    <Resource Include="Data\ChampionIcons\Kassadin.png" />
+    <Resource Include="Data\ChampionIcons\Katarina.png" />
+    <Resource Include="Data\ChampionIcons\Kayle.png" />
+    <Resource Include="Data\ChampionIcons\Kayn.png" />
+    <Resource Include="Data\ChampionIcons\Kennen.png" />
+    <Resource Include="Data\ChampionIcons\Khazix.png" />
+    <Resource Include="Data\ChampionIcons\Kindred.png" />
+    <Resource Include="Data\ChampionIcons\Kled.png" />
+    <Resource Include="Data\ChampionIcons\KogMaw.png" />
+    <Resource Include="Data\ChampionIcons\Leblanc.png" />
+    <Resource Include="Data\ChampionIcons\LeeSin.png" />
+    <Resource Include="Data\ChampionIcons\Leona.png" />
+    <Resource Include="Data\ChampionIcons\Lillia.png" />
+    <Resource Include="Data\ChampionIcons\Lissandra.png" />
+    <Resource Include="Data\ChampionIcons\Lucian.png" />
+    <Resource Include="Data\ChampionIcons\Lulu.png" />
+    <Resource Include="Data\ChampionIcons\Lux.png" />
+    <Resource Include="Data\ChampionIcons\Malphite.png" />
+    <Resource Include="Data\ChampionIcons\Malzahar.png" />
+    <Resource Include="Data\ChampionIcons\Maokai.png" />
+    <Resource Include="Data\ChampionIcons\MasterYi.png" />
+    <Resource Include="Data\ChampionIcons\MissFortune.png" />
+    <Resource Include="Data\ChampionIcons\MonkeyKing.png" />
+    <Resource Include="Data\ChampionIcons\Mordekaiser.png" />
+    <Resource Include="Data\ChampionIcons\Morgana.png" />
+    <Resource Include="Data\ChampionIcons\Nami.png" />
+    <Resource Include="Data\ChampionIcons\Nasus.png" />
+    <Resource Include="Data\ChampionIcons\Nautilus.png" />
+    <Resource Include="Data\ChampionIcons\Neeko.png" />
+    <Resource Include="Data\ChampionIcons\Nidalee.png" />
+    <Resource Include="Data\ChampionIcons\Nocturne.png" />
+    <Resource Include="Data\ChampionIcons\Nunu.png" />
+    <Resource Include="Data\ChampionIcons\Olaf.png" />
+    <Resource Include="Data\ChampionIcons\Orianna.png" />
+    <Resource Include="Data\ChampionIcons\Ornn.png" />
+    <Resource Include="Data\ChampionIcons\Pantheon.png" />
+    <Resource Include="Data\ChampionIcons\Poppy.png" />
+    <Resource Include="Data\ChampionIcons\Pyke.png" />
+    <Resource Include="Data\ChampionIcons\Qiyana.png" />
+    <Resource Include="Data\ChampionIcons\Quinn.png" />
+    <Resource Include="Data\ChampionIcons\Rakan.png" />
+    <Resource Include="Data\ChampionIcons\Rammus.png" />
+    <Resource Include="Data\ChampionIcons\RekSai.png" />
+    <Resource Include="Data\ChampionIcons\Rell.png" />
+    <Resource Include="Data\ChampionIcons\Renekton.png" />
+    <Resource Include="Data\ChampionIcons\Rengar.png" />
+    <Resource Include="Data\ChampionIcons\Riven.png" />
+    <Resource Include="Data\ChampionIcons\Rumble.png" />
+    <Resource Include="Data\ChampionIcons\Ryze.png" />
+    <Resource Include="Data\ChampionIcons\Samira.png" />
+    <Resource Include="Data\ChampionIcons\Sejuani.png" />
+    <Resource Include="Data\ChampionIcons\Senna.png" />
+    <Resource Include="Data\ChampionIcons\Seraphine.png" />
+    <Resource Include="Data\ChampionIcons\Sett.png" />
+    <Resource Include="Data\ChampionIcons\Shaco.png" />
+    <Resource Include="Data\ChampionIcons\Shen.png" />
+    <Resource Include="Data\ChampionIcons\Shyvana.png" />
+    <Resource Include="Data\ChampionIcons\Singed.png" />
+    <Resource Include="Data\ChampionIcons\Sion.png" />
+    <Resource Include="Data\ChampionIcons\Sivir.png" />
+    <Resource Include="Data\ChampionIcons\Skarner.png" />
+    <Resource Include="Data\ChampionIcons\Sona.png" />
+    <Resource Include="Data\ChampionIcons\Soraka.png" />
+    <Resource Include="Data\ChampionIcons\Swain.png" />
+    <Resource Include="Data\ChampionIcons\Sylas.png" />
+    <Resource Include="Data\ChampionIcons\Syndra.png" />
+    <Resource Include="Data\ChampionIcons\TahmKench.png" />
+    <Resource Include="Data\ChampionIcons\Taliyah.png" />
+    <Resource Include="Data\ChampionIcons\Talon.png" />
+    <Resource Include="Data\ChampionIcons\Taric.png" />
+    <Resource Include="Data\ChampionIcons\Teemo.png" />
+    <Resource Include="Data\ChampionIcons\Thresh.png" />
+    <Resource Include="Data\ChampionIcons\Tristana.png" />
+    <Resource Include="Data\ChampionIcons\Trundle.png" />
+    <Resource Include="Data\ChampionIcons\Tryndamere.png" />
+    <Resource Include="Data\ChampionIcons\TwistedFate.png" />
+    <Resource Include="Data\ChampionIcons\Twitch.png" />
+    <Resource Include="Data\ChampionIcons\Udyr.png" />
+    <Resource Include="Data\ChampionIcons\Urgot.png" />
+    <Resource Include="Data\ChampionIcons\Varus.png" />
+    <Resource Include="Data\ChampionIcons\Vayne.png" />
+    <Resource Include="Data\ChampionIcons\Veigar.png" />
+    <Resource Include="Data\ChampionIcons\Velkoz.png" />
+    <Resource Include="Data\ChampionIcons\Vi.png" />
+    <Resource Include="Data\ChampionIcons\Viktor.png" />
+    <Resource Include="Data\ChampionIcons\Vladimir.png" />
+    <Resource Include="Data\ChampionIcons\Volibear.png" />
+    <Resource Include="Data\ChampionIcons\Warwick.png" />
+    <Resource Include="Data\ChampionIcons\Xayah.png" />
+    <Resource Include="Data\ChampionIcons\Xerath.png" />
+    <Resource Include="Data\ChampionIcons\XinZhao.png" />
+    <Resource Include="Data\ChampionIcons\Yasuo.png" />
+    <Resource Include="Data\ChampionIcons\Yone.png" />
+    <Resource Include="Data\ChampionIcons\Yorick.png" />
+    <Resource Include="Data\ChampionIcons\Yuumi.png" />
+    <Resource Include="Data\ChampionIcons\Zac.png" />
+    <Resource Include="Data\ChampionIcons\Zed.png" />
+    <Resource Include="Data\ChampionIcons\Ziggs.png" />
+    <Resource Include="Data\ChampionIcons\Zilean.png" />
+    <Resource Include="Data\ChampionIcons\Zoe.png" />
+    <Resource Include="Data\ChampionIcons\Zyra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\TierIcons\bronze_1.png" />
+    <Resource Include="Data\TierIcons\bronze_2.png" />
+    <Resource Include="Data\TierIcons\bronze_3.png" />
+    <Resource Include="Data\TierIcons\bronze_4.png" />
+    <Resource Include="Data\TierIcons\challenger_1.png" />
+    <Resource Include="Data\TierIcons\default.png" />
+    <Resource Include="Data\TierIcons\diamond_1.png" />
+    <Resource Include="Data\TierIcons\diamond_2.png" />
+    <Resource Include="Data\TierIcons\diamond_3.png" />
+    <Resource Include="Data\TierIcons\diamond_4.png" />
+    <Resource Include="Data\TierIcons\gold_1.png" />
+    <Resource Include="Data\TierIcons\gold_2.png" />
+    <Resource Include="Data\TierIcons\gold_3.png" />
+    <Resource Include="Data\TierIcons\gold_4.png" />
+    <Resource Include="Data\TierIcons\grandmaster_1.png" />
+    <Resource Include="Data\TierIcons\iron_1.png" />
+    <Resource Include="Data\TierIcons\iron_2.png" />
+    <Resource Include="Data\TierIcons\iron_3.png" />
+    <Resource Include="Data\TierIcons\iron_4.png" />
+    <Resource Include="Data\TierIcons\master_1.png" />
+    <Resource Include="Data\TierIcons\platinum_1.png" />
+    <Resource Include="Data\TierIcons\platinum_2.png" />
+    <Resource Include="Data\TierIcons\platinum_3.png" />
+    <Resource Include="Data\TierIcons\platinum_4.png" />
+    <Resource Include="Data\TierIcons\silver_1.png" />
+    <Resource Include="Data\TierIcons\silver_2.png" />
+    <Resource Include="Data\TierIcons\silver_3.png" />
+    <Resource Include="Data\TierIcons\silver_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\LoLStats_Gold.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\defaultIcon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

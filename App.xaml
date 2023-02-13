@@ -1,0 +1,10 @@
+﻿<Application x:Class="LoLStats.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:LoLStats"
+             StartupUri="MainWindow.xaml"
+             Exit="Application_exit">
+    <Application.Resources>
+        <Window x:Key="Window" x:Name="ErrWin"></Window>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,179 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:LoLStats">
+    <!--Custom card for champion-->
+    <Style TargetType="{x:Type local:ChampionCustomControl}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+        <Setter Property="Background" Value="#FF9C65A5"/>
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Height" Value="100"/>
+        <Setter Property="Width" Value="100"/>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="#FF9C65A5"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:ChampionCustomControl}">
+                            <Border CornerRadius="10" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel>
+                                        <Label FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center">LEVEL</Label>
+                                        <Label FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding ChampionLevel}"></Label>
+                                        <Button FontSize="11" Content="Builds"  Command="{TemplateBinding OpenBuilds}">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Background" Value="#FFC9ACDB"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="true">
+                                                            <Setter Property="Background" Value="#FFC9ACFF"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border BorderBrush="#FF603C92" BorderThickness="2" Width="44" Height="30" CornerRadius="8" Background="{TemplateBinding Background}">
+                                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Label FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center">PTS</Label>
+                                        <Label FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding ChampionPoints, RelativeSource={RelativeSource TemplatedParent}}"></Label>
+                                        <Button FontSize="11" Content="Counter"  Command="{TemplateBinding OpenCounters}">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Background" Value="#FFC9ACDB"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="true">
+                                                            <Setter Property="Background" Value="#FFC9ACFF"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border BorderBrush="#FF603C92" BorderThickness="2" Width="44" Height="30" CornerRadius="8" Background="{TemplateBinding Background}">
+                                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:ChampionCustomControl}">
+                            <Border CornerRadius="10">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding IconSource}"></ImageBrush>
+                                </Border.Background>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--Custom card for saved account-->
+    <Style TargetType="{x:Type local:SavedAccountCustomControl}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+        <Setter Property="Background" Value="#FF9C65A5"/>
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Height" Value="100"/>
+        <Setter Property="Width" Value="172"/>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter Property="Background" Value="#FF9C65A5"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:SavedAccountCustomControl}">
+                            <Border CornerRadius="15" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                <StackPanel>
+                                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Content="{TemplateBinding Region}"></Label>
+                                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Content="{TemplateBinding AccountName}"></Label>
+                                    <Button Content="Show" VerticalContentAlignment="Center"  Command="{TemplateBinding SearchAccountCommand}" FontSize="18">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="#FFC9ACDB"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="true">
+                                                        <Setter Property="Background" Value="#FFC9ACFF"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border BorderBrush="#FF603C92" BorderThickness="2" Width="140" Height="28" CornerRadius="10" Background="{TemplateBinding Background}">
+                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:SavedAccountCustomControl}">
+                            <Border CornerRadius="15" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                <StackPanel>
+                                    <ComboBox MaxDropDownHeight="80" Text="{Binding Region, Mode=TwoWay}" Width="140" HorizontalContentAlignment="Center" Margin="12,5,12,5">
+                                        <ComboBoxItem Content="EUN1"/>
+                                        <ComboBoxItem Content="EUW1"/>
+                                        <ComboBoxItem Content="NA1"/>
+                                        <ComboBoxItem Content="RU"/>
+                                        <ComboBoxItem Content="KR"/>
+                                        <ComboBoxItem Content="BR1"/>
+                                        <ComboBoxItem Content="OC1"/>
+                                        <ComboBoxItem Content="JP1"/>
+                                        <ComboBoxItem Content="TR1"/>
+                                        <ComboBoxItem Content="LA1"/>
+                                        <ComboBoxItem Content="LA2"/>
+                                    </ComboBox>
+                                    <TextBox Background="#FFC9ACDB" Width="150" TextAlignment="Center" Margin="12,7,12,12" Text="{Binding AccountName, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"></TextBox>
+                                    <Button Content="Remove" VerticalContentAlignment="Center"  Command="{TemplateBinding RemoveSavedAccountCommand}" FontSize="18">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="#FFC9ACDB"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="true">
+                                                        <Setter Property="Background" Value="#FFC9ACFF"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border BorderBrush="#FF603C92" BorderThickness="2" Width="140" Height="28" CornerRadius="10" Background="{TemplateBinding Background}">
+                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
